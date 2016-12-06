@@ -4,11 +4,11 @@ package action.callbacks;
  * MyFetcher
  * Created by luosv on 2016/12/6 0006.
  */
-public class MyFetcher implements Fetcher {
+class MyFetcher implements Fetcher {
 
-    final Data data;
+    private final Data data;
 
-    public MyFetcher(Data data) {
+    MyFetcher(Data data) {
         this.data = data;
     }
 

@@ -24,7 +24,7 @@ public class FutureExample {
             @Override
             public Integer call() throws Exception {
                 // do something
-                return new Integer(100);
+                return 100;
             }
         };
         Future<?> f1 = executor.submit(task1);

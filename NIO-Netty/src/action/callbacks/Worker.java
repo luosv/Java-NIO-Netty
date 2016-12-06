@@ -6,7 +6,7 @@ package action.callbacks;
  */
 public class Worker {
 
-    public void doWork() {
+    private void doWork() {
         Fetcher fetcher = new MyFetcher(new Data(1, 0));
         fetcher.fetchData(new FetcherCallback() {
             @Override
