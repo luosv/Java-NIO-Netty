@@ -46,7 +46,7 @@ public class EchoServer {
             // Binds server, waits for server to close, and releases resources
             // 绑定服务器等待直到绑定完成， 调用 sync() 方法会阻塞直到服务器完成绑定， 然后服务器等待通道关闭， 因为使用 sync(), 所以关闭操作也会被阻塞
             ChannelFuture f = b.bind().sync();
-            System.out.println(EchoServer.class.getName() + "started and listen on " + f.channel().localAddress());
+            System.out.println(EchoServer.class.getName() + " started and listen on " + f.channel().localAddress());
             f.channel().closeFuture().sync();
         } finally {
             // 关闭 EventLoopGroup 释放所有资源和创建的线程
