@@ -22,11 +22,11 @@ public class EchoServer {
 
     private final int port;
 
-    public EchoServer(int port) {
+    private EchoServer(int port) {
         this.port = port;
     }
 
-    public void start() throws Exception {
+    private void start() throws Exception {
         // 指定 NioEventLoopGroup 来接受和处理新连接
         EventLoopGroup group = new NioEventLoopGroup();
         try {

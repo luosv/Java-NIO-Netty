@@ -24,12 +24,12 @@ public class EchoClient {
     private final String host;
     private final int port;
 
-    public EchoClient(String host, int port) {
+    private EchoClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
 
-    public void start() throws Exception {
+    private void start() throws Exception {
         // 创建 EventLoopGroup 对象并设置到 Bootstrap 中，EventLoopGroup 可以理解为是一个线程池，这个线程池用来处理连接、接受数据、发送数据
         EventLoopGroup group = new NioEventLoopGroup();
         try {
