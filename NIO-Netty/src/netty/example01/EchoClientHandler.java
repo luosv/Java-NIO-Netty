@@ -13,16 +13,34 @@ import io.netty.util.CharsetUtil;
  */
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
-    // 从服务器接收到数据后调用
-    @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf msg) throws Exception {
-        System.out.println("Client received: " + ByteBufUtil.hexDump(msg.readBytes(msg.readableBytes())));
+    private final ByteBuf message;
+
+    public EchoClientHandler() {
+        byte[] req = "Hello from client".getBytes();
+        message = Unpooled.buffer(req.length);
+        message.writeBytes(req);
     }
 
     // 客户端连接服务器后被调用
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.write(Unpooled.copiedBuffer("Netty rocks!", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(message);
+    }
+
+    // 从服务器接收到数据后调用
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf msg) throws Exception {
+        System.out.println("Client received: " + ByteBufUtil.hexDump(msg.readBytes(msg.readableBytes())));
+        ByteBuf buf = (ByteBuf) msg;
+        byte[] req = new byte[buf.readableBytes()];
+        buf.readBytes(req);
+        try {
+            String body = new String(req, "UTF-8");
+            System.out.println(body);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 重写 exceptionCaught 方法捕获服务器异常
